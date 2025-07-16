@@ -1,42 +1,39 @@
-# Math Tutor Agent System
+# Math Tutor Streamlit App
 
-This repository contains production-grade prompt templates, type-safe schemas, and business logic for four core agents in an AI math tutor system:
+This is a production-ready, multi-turn math tutor chat app powered by Google Gemini and Streamlit.
 
-## Agents
-
-### 1. PreProcessor Agent
-- **Purpose:** Classifies user messages (language, emotion, intent, topic, toxicity, confidence) and provides rationale.
-- **Prompt:** See `preprocessor/prompt.py`
-- **Schema:** See `preprocessor/schema.py`
-- **Logic:** See `preprocessor/logic.py` (intent override for low confidence)
-
-### 2. Profile Manager Agent
-- **Purpose:** Tracks and evolves user-specific traits, knowledge, gaps, and behavior.
-- **Prompt:** See `profile_manager/prompt.py`
-- **Schema:** See `profile_manager/schema.py`
-- **Logic:** See `profile_manager/logic.py` (profile delta computation)
-
-### 3. Router Agent
-- **Purpose:** Routes the message to the appropriate processing module based on intent, confidence, emotion, and profile gaps.
-- **Prompt:** See `router/prompt.py`
-- **Schema:** See `router/schema.py`
-- **Logic:** See `router/logic.py` (routing rules)
-
-### 4. Summary Agent
-- **Purpose:** Summarizes the conversation so far, incorporating the latest message, PreProcessor output, and Profile Manager delta. The summary is used as input for the PreProcessor and Profile Manager in future turns.
-- **Prompt:** See `summary_agent/prompt.py`
-- **Schema:** See `summary_agent/schema.py`
-- **Logic:** See `summary_agent/logic.py` (optional post-processing)
-
-## Usage
-- Import the relevant agent module and use the prompt, schema, and logic as needed.
-- Prompts are ready for injection into LangChain or LangGraph LLM chains.
-- All schemas are type-safe using Pydantic.
+## Features
+- Real-time math tutor chat with PreProcessor, Profile Manager, Summary Agent, and Router agents
+- Uses Google Gemini (via `google-generativeai`) for LLM-powered classification and routing
+- Clean, modern Streamlit UI
+- Only the latest PreProcessor, Profile Manager, and summary JSONs are saved and displayed
+- No user name or UUIDs in the output
 
 ## Requirements
-```
+- Python 3.8+
+- See `requirements.txt` for dependencies
+
+## Installation
+```bash
 pip install -r requirements.txt
 ```
 
-## Extending
-- Add more agents or extend logic as needed for your math tutor system. 
+## Usage
+```bash
+streamlit run app.py
+```
+
+Open the provided local URL in your browser to chat with the math tutor.
+
+## Configuration
+- Set your Gemini API key in `gemini_api_key.py`.
+
+## Project Structure
+- `app.py` — Main Streamlit app
+- `preprocessor/`, `profile_manager/`, `summary_agent/`, `router/` — Agent logic and schemas
+- `gemini_llm.py` — Gemini LLM utility
+- `gemini_api_key.py` — API key (do not share this file)
+- `requirements.txt` — Python dependencies
+
+---
+**For any further customization or questions, see the code or ask for help!** 

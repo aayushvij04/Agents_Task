@@ -1,7 +1,7 @@
 {
-  "ts": "2024-10-27T12:00:00+00:00",
-  "clean_text": "sirji kya haalchal mai badiya aap batao merko tigno padhna thaa",
-  "lang": "hi",
+  "ts": "2024-08-24T12:00:00+00:00",
+  "clean_text": "yoyo yoo sir",
+  "lang": "en-IN",
   "emojis": [],
   "toxicity": 0.0,
   "emotion": "joy",
@@ -10,11 +10,10 @@
   "topic_secondary": null,
   "confidence": 0.48,
   "rationale": {
-    "lang_reason": "The message is entirely in Hindi.",
-    "emotion_reason": "The phrase \"mai badiya\" suggests the student is feeling good, indicating joy.",
-    "intent_reason": "Given the low confidence (0.48) and the conversational nature of the message in Hindi, the intent is overridden to \"chit_chat\".",
-    "topic_reason": "No mathematical topic is mentioned.",
-    "history_shift": "The message follows a previous expression of sadness, showing a positive shift in emotion."
-  },
-  "student_name": "a1b2c3d4-e5f6-7890-1234-567890abcdef"
+    "lang_reason": "The message contains English words interspersed with what seems to be informal Hindi slang.",
+    "emotion_reason": "The words \"yoyo\" and \"yoo\" suggest a playful and cheerful tone.",
+    "intent_reason": "Given the informal language and the conversation history indicating a shift from sadness to joy, and a low confidence score, the intent is overridden to 'chit_chat'.",
+    "topic_reason": "No mathematical content is present.",
+    "history_shift": "The student's emotional state appears to be shifting towards joy, as indicated by previous messages and the conversation summary."
+  }
 }

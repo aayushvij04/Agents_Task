@@ -1,5 +1,5 @@
 import streamlit as st
-from uuid import uuid4, UUID
+from uuid import UUID
 import json
 from datetime import datetime
 import asyncio
@@ -57,10 +57,12 @@ if user_msg:
 
     if isinstance(pre_out, PreProcessorOutput):
         pre_out = override_intent_if_low_confidence(pre_out)
-        # Replace student_id with student_name in the output dict
         pre_out_dict = pre_out.model_dump()
+        # Remove student_name and any student_id or UUID fields if present
+        if "student_name" in pre_out_dict:
+            del pre_out_dict["student_name"]
         if "student_id" in pre_out_dict:
-            pre_out_dict["student_name"] = pre_out_dict.pop("student_id")
+            del pre_out_dict["student_id"]
         st.session_state.pre_out = pre_out_dict
     else:
         st.error("PreProcessor failed. Try again.")

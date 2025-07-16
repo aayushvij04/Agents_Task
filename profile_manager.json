@@ -1,17 +1,9 @@
 {
   "new_facts": {
-    "name": "Amit",
     "emotion_trend": [
       "sadness",
-      "self-reported_smart",
-      "joy"
-    ],
-    "language": [
-      "Hindi"
-    ],
-    "recent_topic": [
-      "greeting",
-      "self-introduction"
+      "joy",
+      "calm"
     ]
   },
   "profile_gaps": [
