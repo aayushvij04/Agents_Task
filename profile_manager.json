@@ -1,0 +1,18 @@
+{
+  "new_facts": {
+    "emotional_trend": [
+      "sadness",
+      "self-reported_smart"
+    ],
+    "self_perception": [
+      "smart"
+    ]
+  },
+  "profile_gaps": [
+    "learning_style",
+    "motivation_type",
+    "preferred_topic",
+    "math_skills",
+    "goals"
+  ]
+}
