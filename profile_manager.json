@@ -1,18 +1,20 @@
 {
   "new_facts": {
+    "recent_topic": "trigonometry",
     "emotion_trend": [
-      "joy",
-      "reluctance",
-      "self-doubt"
+      "neutral",
+      "distressed"
     ],
-    "communication_style": [
-      "informal",
-      "hesitant"
+    "math_skills": [
+      "struggles with trigonometry"
+    ],
+    "goals": [
+      "avoid failing"
     ]
   },
   "profile_gaps": [
     "learning_style",
     "motivation_type",
-    "confidence_level"
+    "preferred_topic"
   ]
 }

@@ -1,19 +1,19 @@
 {
-  "ts": "2024-08-24T12:00:00+00:00",
-  "clean_text": "sup sirji",
+  "ts": "2024-07-26T16:43:12.123000+00:00",
+  "clean_text": "Sir merko kuch smhja nahi aata mai bohot bhuddu hun trigonometry padhao do mai fail ho jaunga warna",
   "lang": "en-IN",
   "emojis": [],
   "toxicity": 0.0,
-  "emotion": "neutral",
+  "emotion": "fear",
   "intent": "chit_chat",
-  "topic_primary": null,
+  "topic_primary": "trigonometry_basic",
   "topic_secondary": null,
-  "confidence": 0.48,
+  "confidence": 0.4,
   "rationale": {
-    "lang_reason": "The message uses a mix of English ('sup') and Hindi ('sirji'), indicating Hinglish.",
-    "emotion_reason": "The greeting \"sup sirji\" is neutral in tone, neither expressing positive nor negative emotion.",
-    "intent_reason": "Given the low confidence (0.48) and the informal greeting, the intent is overridden to 'chit_chat'.",
-    "topic_reason": "No math topic is mentioned in the message.",
-    "history_shift": "The student's previous messages showed uncertainty and self-doubt, which this message continues."
+    "lang_reason": "The message contains a mix of Hindi and English words, indicating Hinglish.",
+    "emotion_reason": "Phrases like \"mai bohot bhuddu hun\" (I am very stupid) and \"fail ho jaunga\" (I will fail) express fear of failure.",
+    "intent_reason": "Student's low confidence (0.4) overrides other intent signals; the fear and plea for help suggest a need for emotional support and encouragement, thus classified as chit-chat.",
+    "topic_reason": "The mention of \"trigonometry\" clearly indicates the subject matter.",
+    "history_shift": "The student's previous message was neutral; this message shows a significant shift to fear and low confidence."
   }
 }
