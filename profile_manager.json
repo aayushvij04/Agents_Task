@@ -2,13 +2,10 @@
   "new_facts": {
     "emotion_trend": [
       "sadness",
-      "joy",
-      "calm"
+      "joy"
     ]
   },
   "profile_gaps": [
-    "learning_style",
-    "motivation_type",
     "preferred_topic",
     "math_skills",
     "goals"

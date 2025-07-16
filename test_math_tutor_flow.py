@@ -1,28 +1,24 @@
 from preprocessor import PreProcessorInput, PreProcessorOutput, override_intent_if_low_confidence, PREPROCESSOR_PROMPT
 from profile_manager import ProfileManagerInput, ProfileManagerOutput, compute_profile_delta, PROFILE_MANAGER_PROMPT
-from summary_agent import SummaryAgentInput, postprocess_summary, SUMMARY_AGENT_PROMPT
+from summary_agent import SummaryAgentInput, SummaryAgentOutput, postprocess_summary, SUMMARY_AGENT_PROMPT
 from router import RouterInput, RouterOutput, route_message, ROUTER_PROMPT
 from uuid import uuid4, UUID
 from datetime import datetime
-from gemini_llm import gemini_llm
+from openrouter_llm import openrouter_llm
 import json
 import sys
 
-# Utility to call Gemini and parse JSON output
+# Utility to call OpenRouter and parse JSON output
 def call_agent(prompt, input_data, output_model=None):
-    response_text = gemini_llm(prompt, input_data)
+    response_text = openrouter_llm(prompt, input_data)
     if output_model:
         try:
             # Find the first { ... } block in the response
             json_str = response_text[response_text.find('{'):response_text.rfind('}')+1]
-            # Patch student_id if needed
-            if output_model is PreProcessorOutput and 'replace_with_uuid' in json_str:
-                import re
-                json_str = re.sub(r'("student_id"\s*:\s*")replace_with_uuid("\s*,)',
-                                  r'\1' + str(uuid4()) + r'\2', json_str)
+            # Patch student_id if needed (legacy, not used now)
             return output_model.model_validate_json(json_str)
         except Exception as e:
-            print("Error parsing Gemini output:", e)
+            print("Error parsing OpenRouter output:", e)
             print("Raw output:", response_text)
             return response_text
     return response_text
@@ -60,7 +56,7 @@ def main():
     ensure_model(prof_out, ProfileManagerOutput, "Profile Manager")
     print("\n[Profile Manager Output]\n", prof_out.model_dump_json(indent=2))
 
-    # 3. Summary Agent (accept paragraph string, not JSON)
+    # 3. Summary Agent
     sum_input = SummaryAgentInput(
         user_msg=user_msg,
         preprocessor_output=pre_out.model_dump(),

@@ -1,19 +1,21 @@
 {
-  "ts": "2024-08-24T12:00:00+00:00",
-  "clean_text": "yoyo yoo sir",
+  "ts": "2023-10-14T12:00:00+00:00",
+  "clean_text": "sir kuch samjh nahi aa raha",
   "lang": "en-IN",
-  "emojis": [],
-  "toxicity": 0.0,
-  "emotion": "joy",
+  "emojis": [
+    "\ud83e\udd14"
+  ],
+  "toxicity": 0.02,
+  "emotion": "uncertain",
   "intent": "chit_chat",
   "topic_primary": null,
   "topic_secondary": null,
   "confidence": 0.48,
   "rationale": {
-    "lang_reason": "The message contains English words interspersed with what seems to be informal Hindi slang.",
-    "emotion_reason": "The words \"yoyo\" and \"yoo\" suggest a playful and cheerful tone.",
-    "intent_reason": "Given the informal language and the conversation history indicating a shift from sadness to joy, and a low confidence score, the intent is overridden to 'chit_chat'.",
-    "topic_reason": "No mathematical content is present.",
-    "history_shift": "The student's emotional state appears to be shifting towards joy, as indicated by previous messages and the conversation summary."
+    "lang_reason": "The message is in Hindi with an English salutation 'sir', classifying it as Hinglish.",
+    "emotion_reason": "The phrase 'kuch samjh nahi aa raha' indicates confusion or uncertainty.",
+    "intent_reason": "The message shows lack of understanding but does not explicitly request help or explanation, aligning with 'chit_chat' due to low confidence.",
+    "topic_reason": "No specific math topic is mentioned in the user's message.",
+    "history_shift": "The consistent pattern of informal and casual tone from the previous messages continues in this exchange."
   }
 }
