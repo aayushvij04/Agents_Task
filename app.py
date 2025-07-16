@@ -8,8 +8,7 @@ from preprocessor import PreProcessorInput, PreProcessorOutput, override_intent_
 from profile_manager import ProfileManagerInput, ProfileManagerOutput, PROFILE_MANAGER_PROMPT
 from summary_agent import SummaryAgentInput, postprocess_summary, SUMMARY_AGENT_PROMPT
 from router import RouterInput, RouterOutput, ROUTER_PROMPT
-from test_math_tutor_flow import call_agent
-from openrouter_llm import openrouter_llm
+from test_math_tutor_flow import call_agent  # Reuse your Gemini call logic
 
 st.set_page_config(page_title="Math Tutor Chat", page_icon="🧮")
 st.title("🧮 Math Tutor Chat (Gemini-powered)")
@@ -42,18 +41,6 @@ if "summary" not in st.session_state:
 
 user_msg = st.chat_input("Type your math question or message...")
 
-def call_agent(prompt, input_data, output_model=None):
-    response_text = openrouter_llm(prompt, input_data)
-    if output_model:
-        try:
-            json_str = response_text[response_text.find('{'):response_text.rfind('}')+1]
-            return output_model.model_validate_json(json_str)
-        except Exception as e:
-            print("Error parsing OpenRouter output:", e)
-            print("Raw output:", response_text)
-            return response_text
-    return response_text
-
 async def run_agents_async(user_msg, summary, profile):
     loop = asyncio.get_event_loop()
     with ThreadPoolExecutor() as executor:
@@ -71,6 +58,7 @@ if user_msg:
     if isinstance(pre_out, PreProcessorOutput):
         pre_out = override_intent_if_low_confidence(pre_out)
         pre_out_dict = pre_out.model_dump()
+        # Remove student_name and any student_id or UUID fields if present
         if "student_name" in pre_out_dict:
             del pre_out_dict["student_name"]
         if "student_id" in pre_out_dict:

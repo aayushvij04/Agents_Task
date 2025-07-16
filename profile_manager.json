@@ -1,13 +1,18 @@
 {
   "new_facts": {
     "emotion_trend": [
-      "sadness",
-      "joy"
+      "joy",
+      "reluctance",
+      "self-doubt"
+    ],
+    "communication_style": [
+      "informal",
+      "hesitant"
     ]
   },
   "profile_gaps": [
-    "preferred_topic",
-    "math_skills",
-    "goals"
+    "learning_style",
+    "motivation_type",
+    "confidence_level"
   ]
 }

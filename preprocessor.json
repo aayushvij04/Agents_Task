@@ -1,21 +1,19 @@
 {
-  "ts": "2023-10-14T12:00:00+00:00",
-  "clean_text": "sir kuch samjh nahi aa raha",
+  "ts": "2024-08-24T12:00:00+00:00",
+  "clean_text": "sup sirji",
   "lang": "en-IN",
-  "emojis": [
-    "\ud83e\udd14"
-  ],
-  "toxicity": 0.02,
-  "emotion": "uncertain",
+  "emojis": [],
+  "toxicity": 0.0,
+  "emotion": "neutral",
   "intent": "chit_chat",
   "topic_primary": null,
   "topic_secondary": null,
   "confidence": 0.48,
   "rationale": {
-    "lang_reason": "The message is in Hindi with an English salutation 'sir', classifying it as Hinglish.",
-    "emotion_reason": "The phrase 'kuch samjh nahi aa raha' indicates confusion or uncertainty.",
-    "intent_reason": "The message shows lack of understanding but does not explicitly request help or explanation, aligning with 'chit_chat' due to low confidence.",
-    "topic_reason": "No specific math topic is mentioned in the user's message.",
-    "history_shift": "The consistent pattern of informal and casual tone from the previous messages continues in this exchange."
+    "lang_reason": "The message uses a mix of English ('sup') and Hindi ('sirji'), indicating Hinglish.",
+    "emotion_reason": "The greeting \"sup sirji\" is neutral in tone, neither expressing positive nor negative emotion.",
+    "intent_reason": "Given the low confidence (0.48) and the informal greeting, the intent is overridden to 'chit_chat'.",
+    "topic_reason": "No math topic is mentioned in the message.",
+    "history_shift": "The student's previous messages showed uncertainty and self-doubt, which this message continues."
   }
 }
