@@ -1,6 +1,7 @@
 import google.generativeai as genai
+from gemini_api_key import GEMINI_API_KEY
 
-genai.configure(api_key="AIzaSyBxE6V6khLW0WyiO04ib3zxyhVU9sSTH6I")
+genai.configure(api_key=GEMINI_API_KEY)
 
 def gemini_llm(prompt: str, input_data: dict) -> str:
     # Format the input for Gemini: prompt + input as string

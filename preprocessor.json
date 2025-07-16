@@ -1,6 +1,6 @@
 {
-  "ts": "2024-10-27T12:34:56.789000+00:00",
-  "clean_text": "mera naam amit hai aur mai bohot smart hun",
+  "ts": "2024-10-27T12:00:00+00:00",
+  "clean_text": "sirji kya haalchal mai badiya aap batao merko tigno padhna thaa",
   "lang": "hi",
   "emojis": [],
   "toxicity": 0.0,
@@ -11,10 +11,10 @@
   "confidence": 0.48,
   "rationale": {
     "lang_reason": "The message is entirely in Hindi.",
-    "emotion_reason": "The phrase \"mai bohot smart hun\" (I am very smart) expresses confidence and positivity, suggesting joy.",
-    "intent_reason": "Given the low confidence (0.48) and the emotional content of the message, the intent is overridden to 'chit_chat'.",
-    "topic_reason": "There is no mathematical content in the message.",
-    "history_shift": "The student's previous message expressed sadness, but this message shows a shift towards a more positive and confident tone."
+    "emotion_reason": "The phrase \"mai badiya\" suggests the student is feeling good, indicating joy.",
+    "intent_reason": "Given the low confidence (0.48) and the conversational nature of the message in Hindi, the intent is overridden to \"chit_chat\".",
+    "topic_reason": "No mathematical topic is mentioned.",
+    "history_shift": "The message follows a previous expression of sadness, showing a positive shift in emotion."
   },
   "student_name": "a1b2c3d4-e5f6-7890-1234-567890abcdef"
 }
