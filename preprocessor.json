@@ -1,19 +1,19 @@
 {
-  "ts": "2023-12-01T12:00:00+00:00",
-  "clean_text": "kya hal chal sir ji",
-  "lang": "hi",
+  "ts": "2022-01-01T12:00:00+00:00",
+  "clean_text": "my name is aman now",
+  "lang": "en",
   "emojis": [],
   "toxicity": 0.0,
-  "emotion": "neutral",
+  "emotion": "joy",
   "intent": "chit_chat",
   "topic_primary": null,
   "topic_secondary": null,
-  "confidence": 0.4,
+  "confidence": 0.48,
   "rationale": {
-    "lang_reason": "The message is written in Hindi.",
-    "emotion_reason": "The tone is polite and neutral, without any strong emotions.",
-    "intent_reason": "Given the low confidence (0.4) and the context from the conversation summary, the intent is overridden to 'chit_chat' to prioritize emotional support.",
-    "topic_reason": "No specific math topic is mentioned in the message.",
-    "history_shift": "The student's emotion has shifted from distress and fear to a more neutral tone, indicating a need for continued emotional support."
+    "lang_reason": "The message is mostly in English with common keywords, so it's English.",
+    "emotion_reason": "The tone is joyful and casual, indicating a chit-chat intent.",
+    "intent_reason": "The message is more of a casual conversation rather than a specific math-related query.",
+    "topic_reason": "",
+    "history_shift": "The student showed a positive emotional shift from previous distress, indicating the need for emotional support."
   }
 }

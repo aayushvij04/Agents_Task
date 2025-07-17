@@ -1,16 +1,16 @@
 {
   "new_facts": {
+    "recent_topic": "algebra_linear",
     "emotion_trend": [
-      "distressed",
-      "fear",
-      "seeking help"
+      "joyful",
+      "positive"
     ],
-    "recent_topic": "trigonometry",
-    "confident_in": "reaching out for help"
+    "confident_in": [
+      "fractions"
+    ]
   },
   "profile_gaps": [
     "learning_style",
-    "motivation_type",
-    "preferred_topic"
+    "motivation_type"
   ]
 }

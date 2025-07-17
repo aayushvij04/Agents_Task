@@ -1,0 +1,23 @@
+{
+  "student-001": {
+    "student_id": "student-001",
+    "name": "Arjun Sharma",
+    "grade": 10,
+    "learning_style": "visual",
+    "mastered_topics": [
+      "algebra_linear",
+      "trigonometry_basic"
+    ],
+    "struggling_topics": []
+  },
+  "student-002": {
+    "student_id": "student-002",
+    "name": "Priya Singh",
+    "grade": 9,
+    "learning_style": "textual",
+    "mastered_topics": [],
+    "struggling_topics": [
+      "geometry"
+    ]
+  }
+}

@@ -15,12 +15,17 @@ def call_agent(prompt, input_data, output_model=None):
         try:
             # Find the first { ... } block in the response
             json_str = response_text[response_text.find('{'):response_text.rfind('}')+1]
+            import json
+            data = json.loads(json_str)
+            # Patch: convert empty topic strings to None
+            for k in ["topic_primary", "topic_secondary"]:
+                if k in data and data[k] == "":
+                    data[k] = None
             # Patch student_id if needed (legacy, not used now)
-            if output_model is PreProcessorOutput and 'replace_with_uuid' in json_str:
+            if output_model.__name__ == "PreProcessorOutput" and 'replace_with_uuid' in json_str:
                 import re
-                json_str = re.sub(r'("student_id"\s*:\s*")replace_with_uuid("\s*,)',
-                                  r'\1' + str(uuid4()) + r'\2', json_str)
-            return output_model.model_validate_json(json_str)
+                data['student_id'] = str(uuid4())
+            return output_model(**data)
         except Exception as e:
             print("Error parsing OpenRouter output:", e)
             print("Raw output:", response_text)
