@@ -1,10 +1,12 @@
 {
   "new_facts": {
     "emotion_trend": [
-      "neutral",
       "distressed",
+      "fear",
       "seeking help"
-    ]
+    ],
+    "recent_topic": "trigonometry",
+    "confident_in": "reaching out for help"
   },
   "profile_gaps": [
     "learning_style",

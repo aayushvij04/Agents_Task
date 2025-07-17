@@ -8,10 +8,10 @@ from preprocessor import PreProcessorInput, PreProcessorOutput, override_intent_
 from profile_manager import ProfileManagerInput, ProfileManagerOutput, PROFILE_MANAGER_PROMPT
 from summary_agent import SummaryAgentInput, postprocess_summary, SUMMARY_AGENT_PROMPT
 from router import RouterInput, RouterOutput, ROUTER_PROMPT
-from test_math_tutor_flow import call_agent  # Reuse your Gemini call logic
+from test_math_tutor_flow import call_agent  # Uses openrouter_llm now
 
 st.set_page_config(page_title="Math Tutor Chat", page_icon="🧮")
-st.title("🧮 Math Tutor Chat (Gemini-powered)")
+st.title("🧮 Math Tutor Chat (OpenRouter-powered)")
 
 def json_default(obj):
     if isinstance(obj, UUID):
