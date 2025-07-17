@@ -9,9 +9,85 @@ from profile_manager import ProfileManagerInput, ProfileManagerOutput, PROFILE_M
 from summary_agent import SummaryAgentInput, postprocess_summary, SUMMARY_AGENT_PROMPT
 from router import RouterInput, RouterOutput, ROUTER_PROMPT
 from test_math_tutor_flow import call_agent  # Uses openrouter_llm now
-from persistent_memory_service import MemoryService
-from ltm_agent import LTMConsolidationInput, consolidate_ltm, LTMProfile
-from ltm_agent import STMTurn, STMPreprocessorOutput
+from persistent_memory_service import MemoryService, StudentProfile
+from ltm_agent import LTMProfile, STMPreprocessorOutput, STMTurn, LTMConsolidationInput, LTMUpdateOperation, LTMConsolidationOutput, LTM_ENUMS
+from ltm_agent.logic import consolidate_ltm
+
+LTM_ENUMS = {
+    "learning_style": ["visual", "textual", "practice_oriented"],
+    "emotion": ["joy", "sadness", "anger", "fear", "surprise", "love", "neutral", "uncertain"],
+    "intent": [
+        "ask_explanation", "request_example", "request_practice", "answer_submission",
+        "ask_solution_check", "ask_hint", "emotional_support", "request_motivation",
+        "feedback_positive", "feedback_negative", "meta_platform", "greeting", "chit_chat"
+    ],
+    "topic": [
+        "fractions", "decimals_percentages", "geometry", "algebra_linear",
+        "algebra_quadratic", "statistics", "probability_basic", "trigonometry_basic"
+    ]
+}
+
+def is_valid_enum(field, value):
+    if field in LTM_ENUMS:
+        return value in LTM_ENUMS[field]
+    return True
+
+# --- LTM Helper Functions ---
+
+def student_profile_to_ltm_profile(profile):
+    """
+    Converts a StudentProfile (from persistent_memory_service) to LTMProfile (from ltm_agent).
+    """
+    from ltm_agent import LTMProfile
+    return LTMProfile(
+        learning_style=getattr(profile, "learning_style", None),
+        motivation_type=getattr(profile, "motivation_type", None),
+        goals=getattr(profile, "goals", []),
+        mastered_topics=getattr(profile, "mastered_topics", []),
+        struggling_topics=getattr(profile, "struggling_topics", []),
+        emotion_baseline=getattr(profile, "emotion_baseline", None),
+        performance_history=getattr(profile, "performance_history", {})
+    )
+
+def build_stm_turns(stm_turns_raw):
+    """
+    Converts a list of raw STM dicts to a list of STMTurn objects for LTM agent.
+    """
+    from ltm_agent import STMTurn, STMPreprocessorOutput
+    stm_turns = []
+    for i, turn in enumerate(stm_turns_raw):
+        pre_out = turn.get("preprocessor_output", {})
+        stm_pre_out = STMPreprocessorOutput(
+            emotion=pre_out.get("emotion"),
+            intent=pre_out.get("intent"),
+            topic_primary=pre_out.get("topic_primary"),
+            confidence=pre_out.get("confidence"),
+        ) if pre_out else None
+        stm_turns.append(
+            STMTurn(
+                turn=i+1,
+                user_msg=turn.get("user_msg"),
+                preprocessor_output=stm_pre_out,
+                # Add more fields as needed
+            )
+        )
+    return stm_turns
+
+def update_and_save_ltm_profile(profile, updates, memory_service):
+    """
+    Applies updates to a StudentProfile and saves it using the MemoryService.
+    """
+    profile.apply_updates(updates)
+    memory_service.save_student_profile(profile)
+    return profile
+
+def reload_ltm_profile(student_id, memory_service):
+    """
+    Reloads the latest LTM profile for a student.
+    """
+    profile = memory_service.get_student_profile(student_id)
+    ltm_dict = profile.to_dict()
+    return ltm_dict, profile
 
 st.set_page_config(page_title="Math Tutor Chat", page_icon="🧮")
 st.title("🧮 Math Tutor Chat (OpenRouter-powered)")
@@ -157,16 +233,15 @@ if user_msg:
         current_ltm_profile=ltm_profile,
         short_term_memory=stm_turns
     )
-    output = consolidate_ltm(ltm_input)
-    updates = [op.model_dump() for op in output.updates]
-    if updates:
-        profile.apply_updates(updates)
-        memory_service.save_student_profile(profile)
-        st.success(f"LTM updated! Rationale: {output.rationale}")
-        # Reload and display updated LTM
-        ltm_dict, profile = display_ltm_profile(student_id)
-    else:
-        st.info("No significant LTM updates were proposed.")
+    
+    new_profile = consolidate_ltm(ltm_input.short_term_memory, ltm_input.current_ltm_profile)
+    # Convert LTMProfile (Pydantic) to StudentProfile (custom class)
+    # Defensive: ensure student_id is always a string
+    sid = student_id if student_id is not None else ""
+    student_profile = StudentProfile(sid, new_profile.dict())
+    memory_service.save_student_profile(student_profile)
+    st.success("LTM profile updated!")
+    ltm_dict, profile = display_ltm_profile(student_id)
 
 # Display the latest state
 st.subheader("PreProcessor Output (JSON)")
@@ -181,35 +256,3 @@ st.write(st.session_state.summary)
 if "router_out" in st.session_state:
     st.subheader("Router Output (JSON)")
     st.json(st.session_state.router_out) 
-
-def student_profile_to_ltm_profile(profile):
-    # profile is a StudentProfile instance
-    return LTMProfile(
-        learning_style=profile.learning_style,
-        motivation_type=getattr(profile, "motivation_type", None),
-        goals=getattr(profile, "goals", []),
-        mastered_topics=profile.mastered_topics,
-        struggling_topics=profile.struggling_topics,
-        emotion_baseline=getattr(profile, "emotion_baseline", None),
-        performance_history=getattr(profile, "performance_history", {})
-    )
-
-def build_stm_turns(stm_turns_raw):
-    stm_turns = []
-    for i, turn in enumerate(stm_turns_raw):
-        pre_out = turn.get("preprocessor_output", {})
-        stm_pre_out = STMPreprocessorOutput(
-            emotion=pre_out.get("emotion"),
-            intent=pre_out.get("intent"),
-            topic_primary=pre_out.get("topic_primary"),
-            confidence=pre_out.get("confidence"),
-        ) if pre_out else None
-        stm_turns.append(
-            STMTurn(
-                turn=i+1,
-                user_msg=turn.get("user_msg"),
-                preprocessor_output=stm_pre_out,
-                # Add more fields as needed
-            )
-        )
-    return stm_turns 

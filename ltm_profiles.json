@@ -1,14 +1,15 @@
 {
   "student-001": {
     "student_id": "student-001",
-    "name": "Arjun Sharma",
-    "grade": 10,
-    "learning_style": "visual",
-    "mastered_topics": [
-      "algebra_linear",
-      "trigonometry_basic"
-    ],
-    "struggling_topics": []
+    "name": null,
+    "grade": null,
+    "learning_style": null,
+    "mastered_topics": [],
+    "struggling_topics": [],
+    "motivation_type": null,
+    "goals": [],
+    "emotion_baseline": null,
+    "performance_history": {}
   },
   "student-002": {
     "student_id": "student-002",

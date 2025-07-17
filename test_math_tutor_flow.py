@@ -19,7 +19,7 @@ def call_agent(prompt, input_data, output_model=None):
             data = json.loads(json_str)
             # Patch: convert empty topic strings to None
             for k in ["topic_primary", "topic_secondary"]:
-                if k in data and data[k] == "":
+                if k in data and (data[k] == "" or data[k] is None):
                     data[k] = None
             # Patch student_id if needed (legacy, not used now)
             if output_model.__name__ == "PreProcessorOutput" and 'replace_with_uuid' in json_str:

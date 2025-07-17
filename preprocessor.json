@@ -1,19 +1,19 @@
 {
-  "ts": "2022-01-01T12:00:00+00:00",
-  "clean_text": "my name is aman now",
-  "lang": "en",
+  "ts": "2022-01-31T15:26:47+00:00",
+  "clean_text": "sir my new name is chintu",
+  "lang": "hi",
   "emojis": [],
-  "toxicity": 0.0,
+  "toxicity": 0.03,
   "emotion": "joy",
   "intent": "chit_chat",
-  "topic_primary": null,
+  "topic_primary": "algebra_linear",
   "topic_secondary": null,
   "confidence": 0.48,
   "rationale": {
-    "lang_reason": "The message is mostly in English with common keywords, so it's English.",
-    "emotion_reason": "The tone is joyful and casual, indicating a chit-chat intent.",
-    "intent_reason": "The message is more of a casual conversation rather than a specific math-related query.",
-    "topic_reason": "",
-    "history_shift": "The student showed a positive emotional shift from previous distress, indicating the need for emotional support."
+    "lang_reason": "The message is in Hindi, indicating the language as Hindi.",
+    "emotion_reason": "The message is positive and joyful, suggesting a cheerful emotion.",
+    "intent_reason": "While the message appears to be chit-chat, due to low confidence, the intent is classified as chit-chat as well.",
+    "topic_reason": "The mention of 'chintu' is related to a personal update, but algebra_linear is inferred from past mentions in the conversation.",
+    "history_shift": "There is a shift towards seeking support and maintaining a cheerful state, indicating progress in emotional trajectory."
   }
 }
