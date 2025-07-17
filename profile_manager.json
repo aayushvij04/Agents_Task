@@ -1,15 +1,9 @@
 {
   "new_facts": {
-    "recent_topic": "trigonometry",
     "emotion_trend": [
       "neutral",
-      "distressed"
-    ],
-    "math_skills": [
-      "struggles with trigonometry"
-    ],
-    "goals": [
-      "avoid failing"
+      "distressed",
+      "seeking help"
     ]
   },
   "profile_gaps": [
